@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import "./booking.css";
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
@@ -36,7 +37,17 @@ const Booking = ({ tour, avgRating }) => {
 
     try {
       if (!user || user === undefined || user === null) {
-        return alert("Please sign in");
+        return Swal.fire({
+          title: "Invalid!",
+
+          text: `Please sign in`,
+
+          icon: "error",
+
+          customClass: {
+            confirmButton: "alertOkButton",
+          },
+        });
       }
 
       const res = await fetch(`${BASE_URL}/booking`, {
@@ -52,11 +63,31 @@ const Booking = ({ tour, avgRating }) => {
       const result = await res.json();
 
       if (!res.ok) {
-        return alert(result.message);
+        return Swal.fire({
+          title: "Invalid!",
+
+          text: `${result.message}`,
+
+          icon: "error",
+
+          customClass: {
+            confirmButton: "alertOkButton",
+          },
+        });
       }
       navigate("/thank-you");
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        title: "Invalid!",
+
+        text: `${error.message}`,
+
+        icon: "error",
+
+        customClass: {
+          confirmButton: "alertOkButton",
+        },
+      });
     }
   };
 

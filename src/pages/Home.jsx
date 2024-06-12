@@ -105,8 +105,12 @@ const Home = () => {
                   With our all experience <br /> we will serve you
                 </h2>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  <br /> Quas aliquam, hic tempora inventore suscipit unde.{" "}
+                  With our wealth of experience and dedication to excellence, we
+                  are committed to serving you at the highest standard. Trust in
+                  our expertise to deliver unparalleled service, tailored to
+                  your needs and preferences. Your satisfaction is our priority,
+                  and we take pride in going above and beyond to ensure your
+                  experience with us is nothing short of exceptional.
                 </p>
               </div>
 
@@ -142,7 +146,7 @@ const Home = () => {
             <Col lg="12">
               <Subtitle subtitle={"Gallery"} />
               <h2 className="gallery__title">
-                Visit our customers tour gallery
+                Visit our customers tour Gallery
               </h2>
             </Col>
             <Col lg="12">

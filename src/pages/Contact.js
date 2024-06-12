@@ -11,15 +11,16 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import "../styles/contact.css";
+import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../utils/config";
 
 const Contact = () => {
   const [credentials, setCredentials] = useState({
-    userName: undefined,
-    email: undefined,
-    password: undefined,
+    name: "",
+    email: "",
+    message: "",
   });
 
   const { dispatch } = useContext(AuthContext);
@@ -31,24 +32,24 @@ const Contact = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    return;
-    try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
-      const result = await res.json();
 
-      if (!res.ok) alert(result.message);
+    setCredentials({
+      name: "",
+      email: "",
+      message: "",
+    });
 
-      dispatch({ type: "REGISTER_SUCCESS" });
-      navigate("/login");
-    } catch (err) {
-      alert(err.message);
-    }
+    Swal.fire({
+      title: "Success!",
+
+      text: `We received your information we will contact you ASAP.`,
+
+      icon: "success",
+
+      customClass: {
+        confirmButton: "alertOkButton",
+      },
+    });
   };
 
   return (

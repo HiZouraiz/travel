@@ -6,6 +6,7 @@ import loginImg from "../assets/images/login.png";
 import userIcon from "../assets/images/user.png";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../utils/config";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -36,7 +37,18 @@ const Login = () => {
       });
 
       const result = await res.json();
-      if (!res.ok) alert(result.message);
+      if (!res.ok)
+        return Swal.fire({
+          title: "Invalid!",
+
+          text: `${result.message}`,
+
+          icon: "error",
+
+          customClass: {
+            confirmButton: "alertOkButton",
+          },
+        });
 
       localStorage.setItem("accessToken", result.token);
 

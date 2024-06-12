@@ -10,6 +10,7 @@ import Newsletter from "../shared/Newsletter";
 import useFetch from "../hooks/useFetch";
 import { BASE_URL } from "../utils/config";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const TourDetails = () => {
   const { id } = useParams();
@@ -42,7 +43,17 @@ const TourDetails = () => {
 
     try {
       if (!user || user === undefined || user === null) {
-        alert("Please sign in");
+        return Swal.fire({
+          title: "Invalid!",
+
+          text: `Please sign in`,
+
+          icon: "error",
+
+          customClass: {
+            confirmButton: "alertOkButton",
+          },
+        });
       }
       const reviewObj = {
         username: user?.username,
@@ -62,11 +73,41 @@ const TourDetails = () => {
 
       const result = await res.json();
       if (!res.ok) {
-        return alert(result.message);
+        return Swal.fire({
+          title: "Invalid!",
+
+          text: `${result.message}`,
+
+          icon: "error",
+
+          customClass: {
+            confirmButton: "alertOkButton",
+          },
+        });
       }
-      alert(result.message);
+      Swal.fire({
+        title: "Invalid!",
+
+        text: `${result.message}`,
+
+        icon: "error",
+
+        customClass: {
+          confirmButton: "alertOkButton",
+        },
+      });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        title: "Invalid!",
+
+        text: `${error.message}`,
+
+        icon: "error",
+
+        customClass: {
+          confirmButton: "alertOkButton",
+        },
+      });
     }
   };
 
@@ -152,7 +193,7 @@ const TourDetails = () => {
                       <input
                         type="text"
                         ref={reviewMsgRef}
-                        placeholder="share your thoughts"
+                        placeholder="Share your thoughts"
                         required
                       />
                       <button
